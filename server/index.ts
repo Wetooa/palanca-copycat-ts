@@ -1,7 +1,7 @@
 require("dotenv").config();
 require("express-async-errors");
 
-const express = require("express");
+import express, { Request, Response } from "express";
 const app = express();
 
 // security packages
@@ -14,17 +14,18 @@ const rateLimiter = require("express-rate-limit");
 const connectDB = require("./config/db");
 
 // require middleware
-
-// authentication middleware
+import { notFound } from "./middleware/notFoundMiddleware";
+const errorHandler = require("./middleware/errorHandlerMiddleware");
 
 // routes
-app.get("/", (req: any, res: any) => {
-  res.send("hello world2");
-});
+import router from "./routes/routes";
+app.use("/api/v1", router);
+
+app.use(notFound);
+app.use(errorHandler);
 
 // run server
 const port = process.env.PORT || 5000;
-
 const start = async () => {
   try {
     // await connectDB(process.env.MONGO_URI)

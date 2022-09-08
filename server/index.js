@@ -8,10 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
 require("dotenv").config();
 require("express-async-errors");
-const express = require("express");
-const app = express();
+const express_1 = __importDefault(require("express"));
+const app = (0, express_1.default)();
 // security packages
 const helmet = require("helmet");
 const cors = require("cors");
@@ -23,7 +27,7 @@ const connectDB = require("./config/db");
 // authentication middleware
 // routes
 app.get("/", (req, res) => {
-    res.send("hello world");
+    res.send("hello world2");
 });
 // run server
 const port = process.env.PORT || 5000;
