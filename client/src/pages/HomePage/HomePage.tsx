@@ -1,5 +1,8 @@
 import React from "react";
 import { useState } from "react";
+
+import axios from "axios";
+
 import allStudents from "../../constants/students";
 import allSections from "../../constants/sections";
 import allEmails from "../../constants/emails";
@@ -13,9 +16,20 @@ function Homepage() {
     setModal(true);
   };
 
+  const handleTest = async () => {
+    try {
+      const { data } = await axios.get(
+        "http://localhost:5000/api/v1/palanca/test"
+      );
+      console.log(data.msg);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
-      {modal ? <p>test</p> : <p>hell nah</p>}
+      <button onClick={handleTest}>testing</button>
       <body className="justify-center">
         <p className="text-end mt-16 mr-10">Sign in via Google</p>
         <div className="text-center mt-20 flex flex-col gap-6 mx-16 text-sm">
