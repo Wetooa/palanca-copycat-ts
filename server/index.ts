@@ -9,17 +9,7 @@ const helmet = require("helmet");
 const cors = require("cors");
 const xss = require("xss-clean");
 const rateLimiter = require("express-rate-limit");
-
-app.set("trust proxy", 1);
-app.use(
-  rateLimiter({
-    windowMs: 15 * 60 * 1000,
-    max: 100,
-  })
-);
-app.use(helmet());
-app.use(cors());
-app.use(xss());
+const passport = require("passport");
 
 // connect database
 const connectDB = require("./config/db");
@@ -30,7 +20,12 @@ const errorHandler = require("./middleware/errorHandlerMiddleware");
 
 // routes
 import router from "./routes/routes";
+require("./middleware/authenticationMiddleware");
 app.use("/api/v1/", router);
+
+app.get("/auth/google", (req: Request, res: any) => {
+  passport.authenticate("google", { scope: ["email", "profile"] });
+});
 
 app.use(notFound);
 app.use(errorHandler);
