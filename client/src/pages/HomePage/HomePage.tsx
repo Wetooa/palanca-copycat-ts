@@ -34,10 +34,9 @@ function Homepage() {
   };
 
   return (
-    <div className="static">
+    <div className="">
       {modal && <Modal {...targetedStudent} />}
-      <br></br>
-      <body className={`justify-center ${modal && "opacity-50"}`}>
+      <body className="justify-center">
         <p className="text-end mt-8 mr-10">Sign in via Google</p>
         <div className="text-center mt-20 flex flex-col gap-6 mx-16 text-sm">
           <h1 className="text-8xl font-bold">Dear kōhai,</h1>

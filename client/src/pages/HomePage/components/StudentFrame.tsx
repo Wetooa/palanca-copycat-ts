@@ -1,15 +1,14 @@
 import React from "react";
 import { ImageRef } from "./ImageRefs";
 
-function StudentFrame(
-  student: {
-    label: string;
-    value: string;
-    nickname: string;
-  },
-  openModal: Function
-) {
-  const cleanName: any = student.label
+type StudentFrameProps = {
+  label: string;
+  value: string;
+  nickname: string;
+};
+
+function StudentFrame(student: StudentFrameProps) {
+  const cleanName: string = student.label
     .trim()
     .replaceAll(" ", "")
     .replaceAll("ñ", "n");
